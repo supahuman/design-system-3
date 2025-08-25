@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/supahuman/design-system-3/compare/v1.0.0...v1.1.0) (2025-08-25)
+
+
+### Features
+
+* add .prettierignore file to exclude unnecessary files from formatting ([1e2292e](https://github.com/supahuman/design-system-3/commit/1e2292ef036000dab1ed2accc75bc96506930f25))
+* simplify Storybook deployment process and update GitHub Pages configuration ([d070f68](https://github.com/supahuman/design-system-3/commit/d070f68650904acbaba8918895c2fd7e3ab14687))
+
 # 1.0.0 (2025-08-25)
 
 
