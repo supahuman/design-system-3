@@ -8,6 +8,12 @@ on:
   release:
     types: [published]
 
+# Add permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   NODE_VERSION: '20'
   PNPM_VERSION: '10'
@@ -183,11 +189,15 @@ jobs:
       - name: 📖 Build Storybook
         run: pnpm build-storybook
 
-      - name: 🚀 Deploy to GitHub Pages
+      - name: � List Storybook files
+        run: ls -la storybook-static/
+
+      - name: �🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
+          force_orphan: true
 
   # Publish to NPM
   publish:
@@ -243,12 +253,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
     steps:
       - name: 📚 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
@@ -282,6 +298,11 @@ jobs:
         with:
           name: dist
           path: dist/
+
+      - name: 🔧 Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: 🤖 Semantic Release
         run: npx semantic-release
