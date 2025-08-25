@@ -12,9 +12,9 @@ export function classNames(
   return classes
     .filter(Boolean)
     .flatMap((cls) => {
-      if (typeof cls === "string") return cls;
+      if (typeof cls === 'string') return cls;
 
-      if (typeof cls === "object" && cls !== null) {
+      if (typeof cls === 'object' && cls !== null) {
         // Object entries and array methods (ES6+)
         return Object.entries(cls)
           .filter(([, value]) => Boolean(value))
@@ -23,6 +23,6 @@ export function classNames(
 
       return [];
     })
-    .join(" ")
+    .join(' ')
     .trim();
 }
