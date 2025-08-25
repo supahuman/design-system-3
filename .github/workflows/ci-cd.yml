@@ -8,11 +8,14 @@ on:
   release:
     types: [published]
 
-# Add permissions for GitHub Pages deployment
+# Add permissions for the workflow
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write # Allow semantic-release to push commits and tags
+  pages: write # Allow GitHub Pages deployment
+  issues: write # Allow semantic-release to create releases
+  pull-requests: write # Allow semantic-release to update PRs
+  actions: read # Allow reading workflow runs
+  id-token: write # OIDC token for authentication
 
 env:
   NODE_VERSION: '20'
@@ -254,10 +257,11 @@ jobs:
     needs: [build]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
+      contents: write # Push commits and tags
+      issues: write # Create and update issues
+      pull-requests: write # Create and update PRs
+      actions: read # Read workflow runs
+      id-token: write # OIDC token for authentication
     steps:
       - name: 📚 Checkout
         uses: actions/checkout@v4
