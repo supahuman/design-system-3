@@ -1,6 +1,6 @@
 {
   "name": "@supahuman/design-system-3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A modern, composable design system built with TypeScript, React, and CSS Modules",
   "type": "module",
   "main": "dist/index.js",

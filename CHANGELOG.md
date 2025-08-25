@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/supahuman/design-system-3/compare/v1.1.0...v1.2.0) (2025-08-25)
+
+
+### Features
+
+* update CI/CD workflow to use PAT_TOKEN for GitHub authentication ([c1961c9](https://github.com/supahuman/design-system-3/commit/c1961c9223c896e65d1e1d82a291ca7dadaefa88))
+
 # [1.1.0](https://github.com/supahuman/design-system-3/compare/v1.0.0...v1.1.0) (2025-08-25)
 
 
