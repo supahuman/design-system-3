@@ -1,4 +1,8 @@
-/* Base styles for the design system */
-@import "./reset.css";
-@import "./variables.css";
-@import "../theme/theme.css";
+/* Design System Styles */
+
+/* Import theme CSS variables */
+@import '../theme/theme.css';
+
+/* Import base styles */
+@import './reset.css';
+@import './variables.css';
