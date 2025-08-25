@@ -1,10 +1,17 @@
 {
-  "name": "@designsystem/core",
+  "name": "@supahuman/design-system-3",
   "version": "0.1.0",
   "description": "A modern, composable design system built with TypeScript, React, and CSS Modules",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supahuman/design-system-3.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
