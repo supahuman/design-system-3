@@ -1,9 +1,8 @@
 # Design System 3
 
 [![CI/CD Pipeline](https://github.com/supahuman/design-system-3/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/supahuman/design-system-3/actions/workflows/ci-cd.yml)
-[![NPM Version](https://img.shields.io/npm/v/@designsystem/core.svg)](https://www.npmjs.com/package/@designsystem/core)
-[![NPM Downloads](https://img.shields.io/npm/dm/@designsystem/core.svg)](https://www.npmjs.com/package/@designsystem/core)
-[![License](https://img.shields.io/npm/l/@designsystem/core.svg)](https://github.com/supahuman/design-system-3/blob/main/LICENSE)
+[![GitHub Package](https://img.shields.io/github/v/release/supahuman/design-system-3?label=GitHub%20Package)](https://github.com/supahuman/design-system-3/packages)
+[![License](https://img.shields.io/github/license/supahuman/design-system-3)](https://github.com/supahuman/design-system-3/blob/main/LICENSE)
 [![Storybook](https://img.shields.io/badge/Storybook-deployed-ff4785)](https://supahuman.github.io/design-system-3/)
 
 A modern, composable design system built with TypeScript, React, and CSS Modules, using ES6+ features.
@@ -19,19 +18,25 @@ A modern, composable design system built with TypeScript, React, and CSS Modules
 
 ## Installation
 
+### GitHub Packages
+
 ```bash
-npm install @designsystem/core
+# First, configure npm to use GitHub Packages for @supahuman scope
+npm config set @supahuman:registry https://npm.pkg.github.com
+
+# Then install the package
+npm install @supahuman/design-system-3
 # or
-yarn add @designsystem/core
+yarn add @supahuman/design-system-3
 # or
-pnpm add @designsystem/core
+pnpm add @supahuman/design-system-3
 ```
 
 ## Usage
 
 ```jsx
-import { Button, TextField } from '@designsystem/core';
-import '@designsystem/core/styles'; // Import styles
+import { Button, TextField } from '@supahuman/design-system-3';
+import '@supahuman/design-system-3/styles'; // Import styles
 
 function App() {
   return (

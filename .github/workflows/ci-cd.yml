@@ -107,7 +107,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
-          fail_ci_if_error: false
 
   # Build Package
   build:
@@ -153,12 +152,16 @@ jobs:
           name: dist
           path: dist/
 
-  # Build and Deploy Storybook
+  # Build and Deploy Storybook - FIXED VERSION
   storybook:
     name: 📖 Build & Deploy Storybook
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck, test]
     if: github.ref == 'refs/heads/main'
+    # GitHub Pages specific environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: 📚 Checkout
         uses: actions/checkout@v4
@@ -192,63 +195,20 @@ jobs:
       - name: 📖 Build Storybook
         run: pnpm build-storybook
 
-      - name: � List Storybook files
+      - name: 📝 List Storybook files
         run: ls -la storybook-static/
 
-      - name: �🚀 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: 📋 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📦 Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          force_orphan: true
+          path: ./storybook-static
 
-  # Publish to NPM
-  publish:
-    name: 🚀 Publish to NPM
-    runs-on: ubuntu-latest
-    needs: [build]
-    if: github.event_name == 'release'
-    steps:
-      - name: 📚 Checkout
-        uses: actions/checkout@v4
-
-      - name: 📦 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - name: 🗂 Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: 🔄 Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: 📥 Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: 📦 Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: 🚀 Publish to NPM
-        run: pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # Semantic Release (Alternative to manual releases)
   semantic-release:
@@ -274,7 +234,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@supahuman'
 
       - name: 📦 Setup pnpm
         uses: pnpm/action-setup@v2
@@ -297,19 +258,14 @@ jobs:
       - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: 📦 Download build artifacts
+      - name: 📥 Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
 
-      - name: 🔧 Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: 🤖 Semantic Release
-        run: npx semantic-release
+      - name: 🤖 Run semantic release
+        run: pnpm semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

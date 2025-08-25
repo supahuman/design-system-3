@@ -13,7 +13,11 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true
+        "npmPublish": true,
+        "pkgRoot": ".",
+        "publishConfig": {
+          "registry": "https://npm.pkg.github.com"
+        }
       }
     ],
     [
