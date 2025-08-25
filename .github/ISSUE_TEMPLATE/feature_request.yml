@@ -1,0 +1,37 @@
+---
+name: ✨ Feature Request
+about: Suggest a new component or feature for the design system
+title: '[FEATURE] '
+labels: ['enhancement', 'needs-discussion']
+assignees: ''
+---
+
+## ✨ Feature Description
+A clear and concise description of the feature you'd like to see.
+
+## 🎯 Use Case
+Describe the problem this feature would solve or the use case it addresses.
+
+## 💡 Proposed Solution
+Describe the solution you'd like to see implemented.
+
+## 🎨 Design Considerations
+- **Component type**: [e.g. Atom, Molecule, Organism]
+- **Accessibility requirements**: 
+- **Responsive behavior**: 
+- **Theme support**: 
+
+## 📋 Acceptance Criteria
+- [ ] Component follows design system principles
+- [ ] Accessibility compliant (WCAG 2.1 AA)
+- [ ] Responsive design
+- [ ] TypeScript support
+- [ ] Storybook documentation
+- [ ] Unit tests
+- [ ] Visual regression tests
+
+## 🎨 Design Assets
+Link to design files, mockups, or examples if available.
+
+## 📚 Additional Context
+Add any other context, screenshots, or examples about the feature request.

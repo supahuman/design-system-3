@@ -1,5 +1,11 @@
 # Design System 3
 
+[![CI/CD Pipeline](https://github.com/supahuman/design-system-3/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/supahuman/design-system-3/actions/workflows/ci-cd.yml)
+[![NPM Version](https://img.shields.io/npm/v/@designsystem/core.svg)](https://www.npmjs.com/package/@designsystem/core)
+[![NPM Downloads](https://img.shields.io/npm/dm/@designsystem/core.svg)](https://www.npmjs.com/package/@designsystem/core)
+[![License](https://img.shields.io/npm/l/@designsystem/core.svg)](https://github.com/supahuman/design-system-3/blob/main/LICENSE)
+[![Storybook](https://img.shields.io/badge/Storybook-deployed-ff4785)](https://supahuman.github.io/design-system-3/)
+
 A modern, composable design system built with TypeScript, React, and CSS Modules, using ES6+ features.
 
 ## Features
@@ -24,8 +30,8 @@ pnpm add @designsystem/core
 ## Usage
 
 ```jsx
-import { Button, TextField } from "@designsystem/core";
-import "@designsystem/core/styles"; // Import styles
+import { Button, TextField } from '@designsystem/core';
+import '@designsystem/core/styles'; // Import styles
 
 function App() {
   return (
