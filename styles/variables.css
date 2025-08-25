@@ -1,0 +1,9 @@
+/* Global CSS variables for the design system */
+:root {
+  /* Responsive base variables using modern CSS */
+  --base-font-size: 1rem;
+  --base-line-height: 1.5;
+  --base-spacing: 0.5rem;
+
+  /* These will be populated by the theme.css file */
+}

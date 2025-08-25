@@ -1,0 +1,4 @@
+/* Base styles for the design system */
+@import "./reset.css";
+@import "./variables.css";
+@import "../theme/theme.css";

@@ -1,0 +1,54 @@
+/* CSS Reset - Modern approach */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Improved default focus styles for better accessibility */
+:focus-visible {
+  outline: 3px solid var(--colors-primary);
+  outline-offset: 2px;
+}
+
+/* Modern smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsive typography using CSS variables */
+body {
+  font-family: var(--typography-fontFamily);
+  font-size: var(--typography-fontSize-base);
+  line-height: var(--typography-lineHeight-normal);
+  color: var(--colors-text);
+  background-color: var(--colors-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Modern image handling */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Improve form element styling consistency */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove list styles */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
