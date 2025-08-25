@@ -152,16 +152,12 @@ jobs:
           name: dist
           path: dist/
 
-  # Build and Deploy Storybook - FIXED VERSION
+  # Build and Deploy Storybook
   storybook:
     name: 📖 Build & Deploy Storybook
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck, test]
     if: github.ref == 'refs/heads/main'
-    # GitHub Pages specific environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: 📚 Checkout
         uses: actions/checkout@v4
@@ -195,20 +191,12 @@ jobs:
       - name: 📖 Build Storybook
         run: pnpm build-storybook
 
-      - name: 📝 List Storybook files
-        run: ls -la storybook-static/
-
-      - name: 📋 Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: 📦 Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: � Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./storybook-static
-
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          force_orphan: true
 
   # Semantic Release (Alternative to manual releases)
   semantic-release:
