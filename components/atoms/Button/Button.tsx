@@ -1,10 +1,12 @@
+import React from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import './Button.css';
+import { classNames } from '../../../utils/classNames.js';
+import styles from './Button.module.css';
 
 /**
  * Button variants
  */
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary';
 
 /**
  * Button sizes
@@ -45,17 +47,38 @@ export function Button({
   disabled = false,
   ...props
 }: ButtonProps) {
-  // Build class names using ES6+ template literals
-  const buttonClass = `ds-button ds-button-${variant} ds-button-${size} ${className} ${
-    isLoading ? 'ds-button-loading' : ''
-  }`.trim();
+  // Combine CSS Module classes
+  const buttonClasses = classNames(
+    styles[variant],
+    styles[size],
+    isLoading ? styles['loading'] : undefined,
+    className,
+  );
 
   return (
-    <button className={buttonClass} disabled={disabled || isLoading} {...props}>
-      {isLoading && <span className="ds-button-spinner" />}
-      {leftIcon && <span className="ds-button-icon ds-button-icon-left">{leftIcon}</span>}
-      <span className="ds-button-text">{children}</span>
-      {rightIcon && <span className="ds-button-icon ds-button-icon-right">{rightIcon}</span>}
+    <button className={buttonClasses} disabled={disabled || isLoading} {...props}>
+      {!isLoading && leftIcon && <span>{leftIcon}</span>}
+      <span>{children}</span>
+      {!isLoading && rightIcon && <span>{rightIcon}</span>}
+      {isLoading && (
+        <div className={styles['spinner']}>
+          <svg className={styles['spinnerIcon']} fill="none" viewBox="0 0 24 24">
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+              className="opacity-25"
+            />
+            <path
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              className="opacity-75"
+            />
+          </svg>
+        </div>
+      )}
     </button>
   );
 }
